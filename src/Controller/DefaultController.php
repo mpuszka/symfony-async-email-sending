@@ -13,10 +13,14 @@ class DefaultController extends AbstractController
     {   
         $name = 'John Doe';
 
-        $bus->dispatch(new EmailMessage($name));
+        if ($bus->dispatch(new EmailMessage($name))) {
+            return new Response(
+                'Email was sent'
+             );
+        }
 
         return new Response(
-          'Email was sent'
+          'Email was NOT sent'
        );
     }
 }
